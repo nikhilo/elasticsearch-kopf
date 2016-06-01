@@ -5,7 +5,7 @@ set -e
 envtpl --keep-template /etc/nginx/nginx.conf.tpl
 
 if [ ! -z "${KOPF_BASIC_AUTH_LOGIN}" ]; then
-    echo "${KOPF_BASIC_AUTH_LOGIN}:${KOPF_BASIC_AUTH_PASSWORD}" > /etc/nginx/kopf.htpasswd
+    htpasswd -b -c /etc/nginx/kopf.htpasswd ${KOPF_BASIC_AUTH_LOGIN} ${KOPF_BASIC_AUTH_PASSWORD}
 fi
 
 KOPF_REFRESH_RATE="${KOPF_REFRESH_RATE:-5000}"
